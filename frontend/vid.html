@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/vid.css">
+  <script src="./js/vid.js" type="module"></script>
+
+  <script src="./js/common.js" type="module"></script>
+  <!-- <script src="./js/controlUsingVoice.js" type="module"></script> -->
+
+  <style>
+    .card {
+      background-color: #374151;
+      /* Tailwind's gray-700 */
+      padding: .5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: rem;
+    }
+
+    .status-message {
+      font-size: 0.87rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .progress-bar-container {
+      background-color: #4b5563;
+      border-radius: 0.25rem;
+      height: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background-color: #10b981;
+      /* Tailwind's green-500 */
+      height: 100%;
+      width: 100%;
+      /* Example: full progress */
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      /* Tailwind's gray-400 */
+    }
+
+    .download-link {
+      background-color: #16a34a;
+      /* Tailwind's green-600 */
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 4px;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-link:hover {
+      background-color: #15803d;
+      /* Tailwind's green-700 */
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="download-metadata-container">
+    <div class="header-container">
+      <div class="go-back icon-container">
+        <p>&#10140;</p>
+      </div>
+      <h2>Download</h2>
+      <div class="okay icon-container">&#10004;</div>
+    </div>
+    <div class="metadata-container">
+      <div class="video-info">
+        <img alt="" class="thumbnail"
+          src="https://i.ytimg.com/vi/NWnBxQjssvQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA1U2yNQeEP-XC2Rw8n8HH08Pj5jQ">
+
+        <div class="video-title">
+          <p>Web Development Full Course [2024] | Complete Roadmap for Web Developers | Edureka</p>
+        </div>
+      </div>
+      <hr>
+      <div class="format-container">
+        <form id="download-form">
+          <label class="url-copy-label">
+            <input type="text" class="download-url-input" name="videoUrl" readonly
+              value="https://www.youtube.com/watch?v=dc3FJMvuUqc&amp;pp=ygUGdmlkZW9z">
+            <span class="url-copy-btn"> Copy</span>
+          </label>
+          <div class="types">
+            <input type="radio" id="type-video" name="fileType" value="video" checked>
+            <label for="type-video">video</label> &nbsp;&nbsp;&nbsp;
+            <input type="radio" id="type-audio" name="fileType" value="audio">
+            <label for="type-audio">audio</label>
+          </div>
+          <div class="video-formats">
+            <!-- <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>1080p</p>
+              <p class="size">493 MB</p>
+              <input type="radio" checked="checked" name="quality" value="1080">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>720p </p>
+              <p class="size">298 MB</p>
+              <input type="radio" name="quality" value="720">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>480p</p>
+              <p class="size">167 MB</p>
+              <input type="radio" name="quality" value="480">
+              <span class="checkmark "></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>240p</p>
+              <p class="size">97 MB</p>
+              <input type="radio" name="quality" value="240">
+              <span class="checkmark"></span>
+            </label> -->
+
+          </div>
+          <button type="submit">click here to download <img alt="" class="download-img"
+              src="https://cdn-icons-png.flaticon.com/128/9797/9797374.png">
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+    <div id="download-area">
+      <!--  area for downloading progress  -->
+    </div>
+  </div>
+
+
+
+  <div class="option-listbox">
+    <p class="watch-later">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/7635/7635476.png">
+      save to watch later
+    </p>
+    <p class="save-to-playlist">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/5765/5765569.png">
+      save to playlist
+    </p>
+    <p class="download">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/9797/9797374.png">
+      download
+    </p>
+    <p class="share">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/3925/3925154.png">
+      share
+    </p>
+    <p class="not-interested">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/4460/4460987.png">
+      not interested
+    </p>
+  </div>
+  <div class="navbar flex-box">
+    <div class="nav-box1 flex-box">
+      <div class="menu-icon-box icon-container">
+        <img alt="" id="menu-icon" src="./images/menu.png">
+      </div>
+      <div class="flex-box">
+        <img alt="" class="logo" src="./images/logo.png">
+        &nbsp;vidTube
+      </div>
+    </div>
+    <div class="nav-box2 flex-box">
+      <div class="search-container flex-box">
+        <input type="text" class="search-box" placeholder="search ...">
+        <img alt="" id="search-icon" src="./images/search.png">
+      </div>
+      <div class="voice-icon-box icon-container">
+        <img alt="" src="./images/voice-search.png">
+      </div>
+    </div>
+    <div class="nav-box3 flex-box">
+      <div class="icon-container">
+        <img alt="" src="./images/upload.png">
+      </div>
+      <div class="icon-container">
+        <img alt="" src="./images/more.png">
+      </div>
+      <div class="icon-container">
+        <img alt="" src="./images/notification.png">
+      </div>
+      <img alt="" id="photo" src="./images/aman.jpg">
+    </div>
+  </div>
+
+  <!-- -----------account-popup-------------- -->
+
+  <div class="acc-popup">
+    <div class="acc-section">
+      <img alt="" class="acc-photo" src="./images/aman.jpg">
+      <div class="acc-name">
+        <p>Aman Verma</p>
+        <p>@amanverma7381</p>
+        <a href="channel.html">View your channel</a>
+      </div>
+    </div>
+    <hr>
+    <div class="options">
+      <a href="account.html" class="flex-box">
+        <img alt="" src="./images/home.png">
+        <p>Google Account</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/history.png">
+        <p>Switch account <span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/explore.png">
+        <p>Sign out</p>
+      </a>
+      <hr>
+      <a href="vidStudio.html" class="flex-box">
+        <img alt="" src="./images/cast.png">
+        <p>VidTube Studio</p>
+      </a>
+      <a href="purchase.html" class="flex-box">
+        <img alt="" src="./images/library.png">
+        <p>Purchases and memberships</p>
+      </a>
+      <hr>
+      <a href="data.html" class="flex-box">
+        <img alt="" src="./images/like.png">
+        <p>Your data in VidTube</p>
+      </a>
+      <a class="appearance flex-box">
+        <img alt="" src="./images/playlist.png">
+        <p>Appearance: Light <span>></span></p>
+      </a>
+      <a class="language flex-box">
+        <img alt="" src="./images/subscription.png">
+        <p>Language: British English<span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/cast.png">
+        <p>Restricted Mode: Off <span>></span></p>
+      </a>
+      <a class="location flex-box">
+        <img alt="" src="./images/library.png">
+        <p>Location: India<span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/like.png">
+        <p>Keyboard shortcuts</p>
+      </a>
+      <hr>
+      <a class="flex-box">
+        <img alt="" src="./images/playlist.png">
+        <p>Settings</p>
+      </a>
+      <hr>
+      <a class="flex-box">
+        <img alt="" src="./images/subscription.png">
+        <p>Help</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/show-more.png">
+        <p>Send feedback</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- -----------appearance-popup-------------- -->
+  <div class="appearance-popup popup">
+    <p><a class="go-back">
+        &#10140; </a> Appearance</p>
+    <hr>
+    <a class="dark-theme">
+      <p>Dark Theme</p>
+    </a>
+    <a class="light-theme">
+      <p>Light Theme</p>
+    </a>
+    <a class="light-image-backed">
+      <p>Light image Theme</p>
+    </a>
+    <a class="dark-image-backed">
+      <p>dark image Theme</p>
+    </a>
+  </div>
+
+  <!-- ------------language-popup-------------- -->
+  <div class="language-popup popup">
+    <p><a class="go-back">
+        &#10140; </a> Choose your language</p>
+    <hr>
+  </div>
+
+  <!-- ------------location-popup-------------- -->
+  <div class="location-popup popup">
+    <p><a class="go-back">
+        &#10140; </a> Choose your location</p>
+    <hr>
+  </div>
+
+  <div class="page-manager">
+    <!---------------------  left panel ------------------>
+    <div class="left-panel">
+      <div class="shortcuts">
+        <a class="active flex-box">
+          <img alt="" src="./images/home.png">
+          <p>Home</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/history.png">
+          <p>History</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/explore.png">
+          <p>Explore</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/cast.png">
+          <p>Cast</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/library.png">
+          <p>Library</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/like.png">
+          <p>Liked Videos</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/playlist.png">
+          <p>Playlists</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/subscription.png">
+          <p>Subscription</p>
+        </a>
+        <a class="flex-box">
+          <img alt="" src="./images/show-more.png">
+          <p>Show more</p>
+        </a>
+      </div>
+      <hr>
+      <div class="subscribed">
+        <h4>SUBSCRIBED</h4>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/tech-burner.jpg">
+          <p>Tech Burner</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/apna-college.jpg">
+          <p>Apna College</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/procodrr.jpg">
+          <p>Procodrr</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/vigyan-recharge.jpg">
+          <p>Vigyan Recharge</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/english-connection.jpg">
+          <p>English Connection</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/english-connection.jpg">
+          <p>English Connection</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/tech-burner.jpg">
+          <p>Tech Burner</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/apna-college.jpg">
+          <p>Apna College</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/procodrr.jpg">
+          <p>Procodrr</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/vigyan-recharge.jpg">
+          <p>Vigyan Recharge</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/english-connection.jpg">
+          <p>English Connection</p>
+        </a>
+        <a class="flex-box" href="">
+          <img alt="" src="./images/english-connection.jpg">
+          <p>English Connection</p>
+        </a>
+      </div>
+    </div>
+    <!-- --------------------main--------------------- -->
+
+    <div class="main flex-box">
+      <div class="vid-category">
+        <div id="div1">All</div>
+        <div class="live">Live</div>
+        <div class="gaming">Gaming</div>
+        <div class="news">News</div>
+        <div class="comedy">Comedy</div>
+        <div class="webDevelopment">Web Development</div>
+        <div class="podcasts">Podcasts</div>
+        <div class="recentlyUploaded">Recently Uploaded</div>
+        <div class="">New For You</div>
+        <div class="movies">Movies</div>
+        <div class="dataStucture">Data Structure</div>
+        <div class="chess">Chess</div>
+        <div class="dataScience">Data Science</div>
+        <div class="wealth">Wealth</div>
+        <div class="python">Python</div>
+        <div class="cricket">Cricket</div>
+        <div class="stocks">Stocks</div>
+        <div class="politics">Politics</div>
+        <div class="watched">Watched</div>
+        <div class="ai">Artificial Intelligence</div>
+        <div class="last-div"> </div>
+      </div>
+
+      <div class="video-area">
+        <div id="top" class="banner">
+          <div class="remove-banner">&#x2716;</div>
+          <h2>Enjoy Your Favourite <span></span></h2>
+        </div>
+      </div>
+      <a href="#top" class="back-to-top"> Top </a>
+    </div>
+  </div>
+
+  <!-- <script src="./ApiData/locationsAndLanguages.js" type="module"></script> -->
+
+</body>
+
+</html>

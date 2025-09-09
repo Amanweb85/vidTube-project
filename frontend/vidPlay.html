@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/vidPlay.css">
+
+  <script src="./js/player.js" defer></script>
+
+
+</head>
+
+<body>
+
+  <div class="download-metadata-container">
+    <div class="header-container">
+      <div class="go-back icon-container">
+        <p>&#10140;</p>
+      </div>
+      <h2>Download</h2>
+      <div class="okay icon-container">&#10004;</div>
+    </div>
+    <div class="metadata-container">
+      <div class="video-info">
+        <img alt="" class="thumbnail"
+          src="https://i.ytimg.com/vi/NWnBxQjssvQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA1U2yNQeEP-XC2Rw8n8HH08Pj5jQ">
+
+        <div class="video-title">
+          <p>Web Development Full Course [2024] | Complete Roadmap for Web Developers | Edureka</p>
+        </div>
+      </div>
+      <hr>
+      <div class="format-container">
+        <form id="download-form" action="/api/downloadVideo">
+          <label class="url-copy-label"> <input type="text" class="download-url-input" name="videoUrl" readonly
+              value="https://www.youtube.com/watch?v=dc3FJMvuUqc&amp;pp=ygUGdmlkZW9z">
+            <span class="url-copy-btn"> Copy</span>
+
+          </label>
+          <div class="types">
+            <input type="radio" id="type-video" name="fileType" value="video" checked>
+            <label for="type-video">video</label> &nbsp;&nbsp;&nbsp;
+            <input type="radio" id="type-audio" name="fileType" value="audio">
+            <label for="type-audio">audio</label>
+          </div>
+          <div class="video-formats">
+            <!-- <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>1080p</p>
+              <p class="size">493 MB</p>
+              <input type="radio" checked="checked" name="quality" value="1080">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>720p </p>
+              <p class="size">298 MB</p>
+              <input type="radio" name="quality" value="720">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>480p</p>
+              <p class="size">167 MB</p>
+              <input type="radio" name="quality" value="480">
+              <span class="checkmark "></span>
+            </label>
+            <label class="container format">
+              <p class="quality"><span style="font-size: 10px;">mp4</span> <br>240p</p>
+              <p class="size">97 MB</p>
+              <input type="radio" name="quality" value="240">
+              <span class="checkmark"></span>
+            </label> -->
+
+          </div>
+          <button type="submit">click here to download <img alt="" class="download-img"
+              src="https://cdn-icons-png.flaticon.com/128/9797/9797374.png">
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-status">
+        <p>size</p>
+        <span class="size"></span>
+      </div>
+      <div class="progress-status">
+        <p>downloaded</p>
+        <span class="downloaded-size"></span>
+      </div>
+      <div class="progress-status">
+        <p>percentage</p>
+        <span class="percentage"></span>
+      </div>
+      <div class="progress-status">
+        <p>speed</p>
+        <span class="speed"></span>
+      </div>
+      <div class="progress-status">
+        <p>time</p>
+        <span class="time"></span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="option-listbox">
+    <p class="watch-later">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/7635/7635476.png">
+      save to watch later
+    </p>
+    <p class="save-to-playlist">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/5765/5765569.png">
+      save to playlist
+    </p>
+    <p class="download">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/9797/9797374.png">
+      download
+    </p>
+    <p class="share">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/3925/3925154.png">
+      share
+    </p>
+    <p class="not-interested">
+      <img alt="" src="https://cdn-icons-png.flaticon.com/128/4460/4460987.png">
+      not interested
+    </p>
+  </div>
+
+  <div class="navbar flex-box">
+    <div class="nav-box1 flex-box">
+      <div class="menu-icon-box icon-container">
+        <img alt="" id="menu-icon" src="./images/menu.png">
+      </div>
+      <div class="flex-box">
+        <img alt="" class="logo" src="./images/logo.png">
+        &nbsp;vidTube
+      </div>
+    </div>
+    <div class="nav-box2 flex-box">
+      <div class="search-container flex-box">
+        <input type="text" class="search-box" placeholder="search ...">
+        <img alt="" id="search-icon" src="./images/search.png">
+      </div>
+      <div class="voice-icon-box icon-container">
+        <img alt="" src="./images/voice-search.png">
+      </div>
+    </div>
+    <div class="nav-box3 flex-box">
+      <div class="icon-container upload">
+        <img alt="" src="./images/upload.png">
+      </div>
+      <div class="icon-container">
+        <img alt="" src="./images/more.png">
+      </div>
+      <div class="icon-container notification">
+        <img alt="" src="./images/notification.png">
+      </div>
+      <img alt="" id="photo" src="./images/aman.jpg">
+    </div>
+  </div>
+  <!-- -----------account-popup-------------- -->
+
+  <div class="acc-popup">
+    <div class="acc-section">
+      <img alt="" class="acc-photo" src="./images/aman.jpg">
+      <div class="acc-name">
+        <p>Aman Verma</p>
+        <p>@amanverma7381</p>
+        <a href="channel.html">View your channel</a>
+      </div>
+    </div>
+    <hr>
+    <div class="options">
+      <a href="account.html" class="flex-box">
+        <img alt="" src="./images/home.png">
+        <p>Google Account</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/history.png">
+        <p>Switch account <span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/explore.png">
+        <p>Sign out</p>
+      </a>
+      <hr>
+      <a href="vidStudio.html" class="flex-box">
+        <img alt="" src="./images/cast.png">
+        <p>VidTube Studio</p>
+      </a>
+      <a href="purchase.html" class="flex-box">
+        <img alt="" src="./images/library.png">
+        <p>Purchases and memberships</p>
+      </a>
+      <hr>
+      <a href="data.html" class="flex-box">
+        <img alt="" src="./images/like.png">
+        <p>Your data in VidTube</p>
+      </a>
+      <a class="appearance flex-box">
+        <img alt="" src="./images/playlist.png">
+        <p>Appearance: Light <span>></span></p>
+      </a>
+      <a class="language flex-box">
+        <img alt="" src="./images/subscription.png">
+        <p>Language: British English<span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/cast.png">
+        <p>Restricted Mode: Off <span>></span></p>
+      </a>
+      <a class="location flex-box">
+        <img alt="" src="./images/library.png">
+        <p>Location:India<span>></span></p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/like.png">
+        <p>Keyboard shortcuts</p>
+      </a>
+      <hr>
+      <a class="flex-box">
+        <img alt="" src="./images/playlist.png">
+        <p>Settings</p>
+      </a>
+      <hr>
+      <a class="flex-box">
+        <img alt="" src="./images/subscription.png">
+        <p>Help</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/show-more.png">
+        <p>Send feedback</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- -----------appearance-popup-------------- -->
+  <div class="appearance-popup popup">
+    <p><a class="go-back">
+        &#10140; </a>
+      Appearance
+    </p>
+    <hr>
+    <a class="light-theme">
+      <p>Light Theme</p>
+    </a>
+    <a class="dark-theme">
+      <p>Dark Theme</p>
+    </a>
+    <a class="light-image-backed">
+      <p>Light image Theme</p>
+    </a>
+    <a class="dark-image-backed">
+      <p>dark image Theme</p>
+    </a>
+  </div>
+
+  <!-- ------------language-popup-------------- -->
+  <div class="language-popup popup">
+    <p><a class="go-back">
+        &#10140; </a> Choose your language</p>
+    <hr>
+  </div>
+
+  <!-- ------------location-popup-------------- -->
+  <div class="location-popup popup">
+    <p><a class="go-back">
+        &#10140; </a> Choose your location</p>
+    <hr>
+  </div>
+
+  <!-- -------------- left panel (sidebar)------------------- -->
+  <div class="left-panel narrow-panel">
+    <div class="shortcuts">
+      <a class="flex-box">
+        <img alt="" src="./images/home.png">
+        <p>Home</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/history.png">
+        <p>History</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/explore.png">
+        <p>Explore</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/cast.png">
+        <p>Cast</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/library.png">
+        <p>Library</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/like.png">
+        <p>Liked Videos</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/playlist.png">
+        <p>Playlists</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/subscription.png">
+        <p>Subscription</p>
+      </a>
+      <a class="flex-box">
+        <img alt="" src="./images/show-more.png">
+        <p>Show more</p>
+      </a>
+    </div>
+    <hr>
+    <div class="subscribed">
+      <h4>SUBSCRIBED</h4>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/tech-burner.jpg">
+        <p>Tech Burner</p>
+      </a>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/apna-college.jpg">
+        <p>Apna College</p>
+      </a>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/procodrr.jpg">
+        <p>Procodrr</p>
+      </a>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/vigyan-recharge.jpg">
+        <p>Vigyan Recharge</p>
+      </a>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/english-connection.jpg">
+        <p>English Connection</p>
+      </a>
+      <a class="flex-box" href="">
+        <img alt="" src="./images/english-connection.jpg">
+        <p>English Connection</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- --------------------playing video---------------------  -->
+
+  <div class="main-container flex-box">
+    <div class="left-video-container">
+      <div id="player">
+        <!-- The <iframe> (and video player) will replace this <div> tag -->
+        <p>Something went Wrong...</p>
+        <p>please check your internet.</p>
+      </div>
+      <h3 class="video-title">
+        HTML Tutorial for Beginners | Complete HTML with Notes & Code
+      </h3>
+      <div class="flex-box vid-options">
+        <p>
+          <span class="view-count">1M</span> views.
+          <span class="time">2 years</span>
+        </p>
+        <div class="flex-box action">
+          <img alt="" src="./images/like.png">
+          <p class="like-count">764</p>
+          <img alt="" src="./images/dislike.png">
+          <p>4</p>
+          <img alt="" src="./images/share.png">
+          <p>share</p>
+          <img alt="" src="./images/save.png">
+          <p>save</p>
+        </div>
+      </div>
+      <hr>
+      <div class="vid-info">
+        <div class="subscribe-box flex-box">
+          <div class="flex-box box1">
+            <img alt="" class="channel-author" src="./images/apna-college.jpg">
+            <div>
+              <h4 class="channel-name">Apna College</h4>
+              <p><span class="subscriber-count">500</span> Subscribers</p>
+            </div>
+          </div>
+          <button type="button" class="subscribe-btn">SUBSCRIBE</button>
+        </div>
+        <div class="video-description small-video-description">
+          Subscribe Apna college to watch more Tutorials on Web Development
+          <p>channel thats makes kearnng Easy</p>
+        </div>
+        <p class="show-more-description comment1">Show More ...</p>
+        <!-- ------comment-container------- -->
+
+        <div class="comment-container">
+          <hr>
+          <h4 class="comment-header">
+            <span class="comment-count">134</span> Comments
+          </h4>
+          <div class="write-comment flex-comment">
+            <img alt="" src="./images/procodrr.jpg">
+            <input type="text" placeholder="Add a comment...">
+          </div>
+        </div>
+        <p class="more-comments comment1">more comments ...</p>
+      </div>
+    </div>
+
+    <!-- -----------right-panel------------ -->
+
+    <div class="right-panel">
+      <div class="vid-category">
+        <div id="div1">All</div>
+        <div>From your search</div>
+        <div>From Apna College</div>
+        <div>Comedy</div>
+        <div>Related</div>
+        <div>For you</div>
+        <div>Recently uploaded</div>
+        <div class="last-div">></div>
+      </div>
+      <div class="option-listbox">
+        <p class="watch-later">
+          <img alt="" src="https://cdn-icons-png.flaticon.com/128/7635/7635476.png">
+          save to watch later
+        </p>
+        <p class="save-to-playlist">
+          <img alt="" src="https://cdn-icons-png.flaticon.com/128/5765/5765569.png">
+          save to playlist
+        </p>
+        <p class="download">
+          <img alt="" src="https://cdn-icons-png.flaticon.com/128/9797/9797374.png">
+          download
+        </p>
+        <p class="share">
+          <img alt="" src="https://cdn-icons-png.flaticon.com/128/3925/3925154.png">
+          share
+        </p>
+        <p class="not-interested">
+          <img alt="" src="https://cdn-icons-png.flaticon.com/128/4460/4460987.png">
+          not interested
+        </p>
+      </div>
+      <!-- [suggested video data ] -->
+    </div>
+  </div>
+  <!-- <script type="module" src="/apidata_files/commentsData.js"></script>
+    <script
+      type="module"
+      src="/apidata_files/locationsAndLanguages.js"
+    ></script>
+    <script
+      type="module"
+      src="/apidata_files/suggestedDataRapidApi.js"
+    ></script> -->
+  <script src="./js/vidPlay.js" type="module"></script>
+  <script src="./js/common.js" type="module"></script>
+</body>
+
+</html>
